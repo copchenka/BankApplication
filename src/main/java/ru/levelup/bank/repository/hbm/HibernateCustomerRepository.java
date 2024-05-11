@@ -1,9 +1,7 @@
 package ru.levelup.bank.repository.hbm;
 
-import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import ru.levelup.bank.domain.Customer;
 import ru.levelup.bank.repository.CustomerRepository;
 

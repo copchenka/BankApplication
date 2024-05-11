@@ -1,7 +1,6 @@
 package ru.levelup.bank.menu.action;
 
 import ru.levelup.bank.configuration.HibernateConfiguration;
-import ru.levelup.bank.domain.Organization;
 import ru.levelup.bank.menu.Action;
 import ru.levelup.bank.menu.ConsoleMenu;
 import ru.levelup.bank.menu.MenuAction;

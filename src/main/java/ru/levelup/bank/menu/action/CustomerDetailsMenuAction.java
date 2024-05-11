@@ -1,6 +1,5 @@
 package ru.levelup.bank.menu.action;
 
-import lombok.RequiredArgsConstructor;
 import ru.levelup.bank.domain.Customer;
 import ru.levelup.bank.jdbc.JdbcConnectionManager;
 import ru.levelup.bank.menu.Action;

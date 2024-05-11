@@ -1,5 +1,7 @@
 package ru.levelup.bank.domain;
 
+import lombok.Getter;
+
 public enum PaymentStatus {
     //у enum приватный конструктор.инициализируется при старте приложения
     //имеет свои методы
@@ -10,15 +12,12 @@ public enum PaymentStatus {
     DONE(3, false),
     FAILED(4, false);
 
+    @Getter
     private int sqlCode;
     private boolean canCancel;
 
     PaymentStatus(int sqlCode, boolean canCancel) {
         this.sqlCode = sqlCode;
-    }
-
-    public int getSqlCode() {
-        return sqlCode;
     }
 
     public PaymentStatus findEnumOrNull(String s) {

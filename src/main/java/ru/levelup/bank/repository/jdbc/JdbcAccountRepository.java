@@ -1,10 +1,8 @@
 package ru.levelup.bank.repository.jdbc;
 
 import lombok.RequiredArgsConstructor;
-import ru.levelup.bank.domain.Account;
 import ru.levelup.bank.domain.AccountJdbc;
 import ru.levelup.bank.jdbc.JdbcConnectionManager;
-import ru.levelup.bank.repository.AccountRepository;
 import ru.levelup.bank.repository.AccountRepositoryJdbc;
 
 import java.sql.*;
