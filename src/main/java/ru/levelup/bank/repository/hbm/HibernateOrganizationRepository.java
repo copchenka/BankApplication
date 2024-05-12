@@ -1,7 +1,6 @@
 package ru.levelup.bank.repository.hbm;
 
 
-import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,14 +10,17 @@ import ru.levelup.bank.repository.OrganizationRepository;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-public class HibernateOrganizationRepository implements OrganizationRepository {
 
-    private final SessionFactory factory;
+public class HibernateOrganizationRepository extends AbstractRepository implements OrganizationRepository {
+
+    public HibernateOrganizationRepository(SessionFactory factory) {
+        super(factory);
+    }
 
     @Override
     public List<Organization> all() {
-        return null;
+        return withSession(session -> session.createQuery("from Organization", Organization.class)//
+                .list());
     }
 
     @Override
@@ -66,7 +68,8 @@ public class HibernateOrganizationRepository implements OrganizationRepository {
 
     @Override
     public Organization byVatin(String vatin) {
-        return null;
+        return withSession(session -> session
+                .get(Organization.class, vatin));
     }
 
     @Override
@@ -74,5 +77,12 @@ public class HibernateOrganizationRepository implements OrganizationRepository {
         return null;
     }
 
+    public Organization create(Integer id, String name, String vatin) {
+        return withTransaction(session -> {
+            Organization organization = new Organization(null, name, vatin);
+            session.persist(organization);
+            return organization;
+        });
+    }
 }
 

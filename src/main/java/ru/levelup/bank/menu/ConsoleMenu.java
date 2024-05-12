@@ -10,14 +10,20 @@ public class ConsoleMenu {
     public static void printGeneralMenu() {
         System.out.println();
         System.out.println("Меню");
-        System.out.println("1. Список всех компаний");
+       System.out.println("1. Список всех организаций");
         System.out.println("2. Список всех клиентов");
         System.out.println("3. Получить информацию о клиенте");
         System.out.println("4. Привязать клиента к компании");
+        System.out.println("5. Создать организацию");
+        System.out.println("6. Найти организацию по ИНН");
+        System.out.println("7. Список аккаунтов");
+        System.out.println("8. Создать аккаунт");
+        System.out.println("9. Создать платеж");
+        System.out.println("10. Найти все платежи аккаунта");
         System.out.println("0. Выход");
     }
 
-    private static String readString(String message) {
+    public static String readString(String message) {
         try {
             System.out.println(message);
             return CONSOLE_READER.readLine(); //не закрываем поток тк все внутри в system.in мы не сами прописали открытие
