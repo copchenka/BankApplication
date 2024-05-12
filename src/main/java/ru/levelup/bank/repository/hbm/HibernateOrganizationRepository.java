@@ -69,7 +69,9 @@ public class HibernateOrganizationRepository extends AbstractRepository implemen
     @Override
     public Organization byVatin(String vatin) {
         return withSession(session -> session
-                .get(Organization.class, vatin));
+                .createQuery("from Organization where vatin = :vatin", Organization.class)
+                .setParameter("vatin", vatin)
+                .uniqueResult());
     }
 
     @Override
