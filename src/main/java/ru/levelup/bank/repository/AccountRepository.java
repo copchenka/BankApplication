@@ -5,12 +5,12 @@ import ru.levelup.bank.domain.Account;
 import java.sql.Date;
 import java.util.List;
 
-public interface AccountRepository<T> {
-    List<T> all();
+public interface AccountRepository {
+    List<Account> all();
 
-    void update(T account);
+    void update(Account account);
 
-    T create(
+   Account create(
             String accountNumber,
             Date openDatetime,
             String status,
@@ -18,6 +18,6 @@ public interface AccountRepository<T> {
             Long bankDocumentId
     );
 
-    void remove(T account);
+    void remove(Account account);
 
 }
