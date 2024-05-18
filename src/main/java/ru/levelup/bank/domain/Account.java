@@ -39,7 +39,7 @@ public class Account {
     )
     private Customer customer;
 
-    public Account(Integer id, String accountNumber, Date openDatetime, String status, String type, Long bankDocumentId) {
+    public Account(Integer id, String accountNumber, Date openDatetime, String status, String type) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.openDatetime = openDatetime;
