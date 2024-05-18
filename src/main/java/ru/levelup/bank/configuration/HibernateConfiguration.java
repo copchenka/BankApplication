@@ -4,10 +4,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import ru.levelup.bank.configuration.files.ConfigurationFileLoader;
 import ru.levelup.bank.domain.Account;
 import ru.levelup.bank.domain.Customer;
 import ru.levelup.bank.domain.Organization;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class HibernateConfiguration {
@@ -17,15 +20,10 @@ public class HibernateConfiguration {
         if (factory != null) {
             throw new RuntimeException("SessionFactory has been already initialized");
         }
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        properties.setProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/lk-bank");
-        properties.setProperty("hibernate.connection.username", "postgres");
-        properties.setProperty("hibernate.connection.password", "1234");
 
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.format_sql", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+
+        Properties properties =buildHibernateProperties();
+
 
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(properties)
@@ -37,6 +35,21 @@ public class HibernateConfiguration {
                 .addAnnotatedClass(Account.class);
         //.addAnnotatedClass(Customer.class);
         factory = configuration.buildSessionFactory(registry);
+    }
+
+    public static Properties buildHibernateProperties() {
+        Map<String, String> configurationProperties = ConfigurationFileLoader.LoadConfiguration();
+
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.connection.driver_class", configurationProperties.get("db.driver"));
+        properties.setProperty("hibernate.connection.url", configurationProperties.get("db.url"));
+        properties.setProperty("hibernate.connection.username", configurationProperties.get("db.username"));
+        properties.setProperty("hibernate.connection.password", configurationProperties.get("db.password"));
+
+        properties.setProperty("hibernate.show_sql", configurationProperties.get("db.debug.show.sql"));
+        properties.setProperty("hibernate.format_sql", configurationProperties.get("db.debug.format.sql"));
+        properties.setProperty("hibernate.hbm2ddl.auto", configurationProperties.get("db.schema.ddl.type"));
+        return properties;
     }
 
     public static SessionFactory getFactory() {
